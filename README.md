@@ -15,3 +15,8 @@ Data se ukládají jen v zařízení (localStorage). Každý telefon má svá da
 
 ## Aktualizace
 Po změně souborů zvyšte `VERSION` v `sw.js` (např. `obytnak-v2`); nová verze se projeví po druhém spuštění aplikace.
+
+## Verze 2.0
+Tmavý vzhled, kategorie (vč. vlastních), řazení a filtry, rozpočet (celkový i po kategoriích), statistiky (kategorie, měsíce, kdo platil),
+fotky účtenek (ukládají se v IndexedDB, komprese na 1280 px), nákupní seznam „Koupit“, deník „Postup stavby“.
+Záloha JSON obsahuje vše včetně fotek; starší zálohy (v1) lze stále načíst. Data z verze 1 se převedou automaticky.
