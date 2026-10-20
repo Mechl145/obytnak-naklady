@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Náklady Obytňák Boxer</title>
+<meta name="description" content="Evidence nákladů na stavbu obytňáku Peugeot Boxer">
+<meta name="theme-color" content="#8a5a2b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Obytňák">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<style>
+:root{
+  --bg:#f5efe6; --card:#fffdf9; --ink:#3b2f25; --muted:#8a7765;
+  --wood:#b07a45; --wood-d:#8a5a2b; --wood-l:#e9d6bd; --line:#eadfce;
+  --red:#b5523b; --shadow:0 10px 30px rgba(80,55,30,.12);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+  --sal:env(safe-area-inset-left,0px); --sar:env(safe-area-inset-right,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);
+  background:radial-gradient(circle at 15% 0%,#fbf6ee 0,transparent 50%),linear-gradient(180deg,#f7f1e8,#efe5d6);min-height:100vh;
+  -webkit-text-size-adjust:100%}
+.wrap{max-width:1100px;margin:0 auto;padding:calc(24px + var(--sat)) calc(20px + var(--sar)) calc(48px + var(--sab)) calc(20px + var(--sal))}
+header.hero{display:flex;align-items:center;justify-content:space-between;gap:24px;
+  background:linear-gradient(135deg,#fffaf3 0%,#f3e5d0 100%);border:1px solid var(--line);
+  border-radius:22px;padding:26px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;inset:auto -60px -80px auto;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(176,122,69,.14),transparent 70%)}
+.hero-text{position:relative}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wood);font-weight:700}
+h1{margin:.25rem 0 .35rem;font-size:2.1rem;line-height:1.15;font-weight:800;color:#3a2a1c}
+.subtitle{font-size:1.1rem;color:var(--muted);margin:0}
+.subtitle b{color:var(--wood-d);font-weight:600}
+.hero img{width:300px;max-width:42%;height:auto;aspect-ratio:600/356;border-radius:16px;box-shadow:0 12px 28px rgba(60,40,20,.25);
+  border:4px solid #fff;transform:rotate(1.2deg);position:relative;flex-shrink:0}
+.total-card{margin-top:20px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 22px;box-shadow:var(--shadow)}
+.stat .lbl{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.stat .val{font-size:1.5rem;font-weight:700;margin-top:4px}
+.stat.main{background:linear-gradient(135deg,#a36c38,#7d5027);color:#fff;border:none}
+.stat.main .lbl{color:#f3dcc0}
+.stat.main .val{font-size:2.3rem;font-weight:800}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow);margin-top:20px}
+.card h2{margin:0 0 14px;font-size:1.15rem;color:#4a3626;display:flex;align-items:center;gap:8px}
+form.entry{display:grid;grid-template-columns:160px 1.5fr 150px 1.5fr auto;gap:12px;align-items:end}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:5px}
+input{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;color:var(--ink);background:#fff;transition:border .15s,box-shadow .15s;min-height:42px}
+input[type=date]{-webkit-appearance:none;appearance:none}
+input:focus{outline:none;border-color:var(--wood);box-shadow:0 0 0 3px rgba(176,122,69,.18)}
+.btn{border:none;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;transition:transform .08s,filter .15s,background .15s;white-space:nowrap;min-height:42px;touch-action:manipulation}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--wood);color:#fff;box-shadow:0 4px 12px rgba(176,122,69,.35)}
+.btn-primary:hover{filter:brightness(1.07)}
+.btn-ghost{background:#f4ebdf;color:#5b4430}
+.btn-ghost:hover{background:#ecdfcd}
+.btn-sm{padding:6px 10px;font-size:.85rem;border-radius:8px;min-height:34px}
+.btn-danger{background:#f6e3dd;color:var(--red)}
+.btn-danger:hover{background:#f0d3ca}
+.btn-install{background:#3b2f25;color:#fff}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.toolbar .search{flex:1;min-width:220px;max-width:360px;position:relative}
+.toolbar .search input{padding-left:34px}
+.toolbar .search span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+thead th{background:#f3e8d9;color:#5b4430;text-align:left;font-weight:700;padding:11px 12px;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+tbody td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:middle}
+tbody tr:nth-child(even){background:#fcf8f2}
+tbody tr:hover{background:#f8efe3}
+td.num,th.num{text-align:right;white-space:nowrap}
+td.price{font-weight:700;font-variant-numeric:tabular-nums}
+td.date{white-space:nowrap;color:#6b5745;font-variant-numeric:tabular-nums}
+td.note{color:var(--muted)}
+td.act{white-space:nowrap;text-align:right}
+td.act .btn+.btn{margin-left:6px}
+tfoot td{padding:12px;border-top:2px solid var(--wood-l);font-weight:800;background:#f8f0e4}
+tr.editing{background:#fff6e6 !important}
+tr.editing input{padding:7px 9px}
+.empty{text-align:center;padding:40px 10px;color:var(--muted)}
+.empty .big{font-size:2.2rem}
+.hint{font-size:.8rem;color:var(--muted);margin-top:10px}
+/* karty (mobil) */
+.cards{display:none}
+.ecard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 12px 12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(80,55,30,.06)}
+.ecard+.ecard{margin-top:10px}
+.ec-main{flex:1;min-width:0}
+.ec-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.ec-item{font-weight:600;font-size:1.02rem;overflow-wrap:anywhere}
+.ec-price{font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums;color:#4a3626}
+.ec-meta{font-size:.85rem;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}
+.ec-act{display:flex;flex-direction:column;gap:6px}
+.ec-act .btn{width:44px;height:44px;min-height:44px;padding:0;font-size:1.05rem;border-radius:12px}
+.ecard.editing{display:block;background:#fff6e6;border-color:var(--wood-l)}
+.ecard.editing .ef{margin-bottom:10px}
+.ecard.editing .ebtns{display:flex;gap:10px}
+.ecard.editing .ebtns .btn{flex:1;min-height:48px}
+.cards-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:14px 16px;border-radius:14px;background:#f8f0e4;border:1px solid var(--wood-l);font-weight:800}
+.toast{position:fixed;left:50%;bottom:calc(24px + var(--sab));transform:translateX(-50%) translateY(30px);background:#3b2f25;color:#fff;padding:10px 18px;border-radius:12px;opacity:0;transition:all .25s;pointer-events:none;box-shadow:var(--shadow);z-index:10;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:28px}
+.print-only{display:none}
+@media (max-width:860px){
+  form.entry{grid-template-columns:1fr 1fr}
+  form.entry .f-item,form.entry .f-note,form.entry .f-btn{grid-column:span 2}
+  form.entry .f-btn .btn{width:100%}
+  form.entry .f-item{order:1} form.entry .f-date{order:2} form.entry .f-price{order:3} form.entry .f-note{order:4} form.entry .f-btn{order:5}
+  .total-card{grid-template-columns:1fr 1fr}
+  .total-card .main{grid-column:span 2}
+}
+@media (max-width:700px){
+  .wrap{padding:calc(12px + var(--sat)) calc(12px + var(--sar)) calc(32px + var(--sab)) calc(12px + var(--sal))}
+  header.hero{flex-direction:row;align-items:center;padding:14px 14px;gap:12px;border-radius:18px}
+  .hero img{width:42%;max-width:180px;transform:none;border-width:3px;border-radius:12px}
+  h1{font-size:1.25rem}
+  .eyebrow{font-size:.68rem}
+  .subtitle{font-size:.88rem}
+  .total-card{margin:4px -12px 0;padding:8px 12px 10px;gap:10px;position:sticky;top:0;padding-top:calc(8px + var(--sat));z-index:5;
+    background:linear-gradient(180deg,rgba(242,233,219,.97) 75%,rgba(242,233,219,0))}
+  .total-card .stat:not(.main){display:none}
+  .stat.main{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 20px rgba(80,55,30,.25)}
+  .stat.main .val{font-size:1.6rem;margin:0}
+  .stat.main .sub{display:block}
+  .card{padding:16px 14px;margin-top:12px;border-radius:16px}
+  form.entry{gap:10px}
+  form.entry .f-date{grid-column:span 1}
+  input,.btn{min-height:48px;font-size:16px}
+  .btn-sm{min-height:44px;font-size:.9rem}
+  .toolbar .search{max-width:none;min-width:0;flex-basis:100%}
+  .actions{display:grid;grid-template-columns:1fr 1fr}
+  .actions .btn{width:100%}
+  .table-wrap{display:none}
+  .cards{display:block}
+}
+@media (max-width:370px){ h1{font-size:1.1rem} .hero img{width:38%} }
+.stat .sub{display:none;font-size:.8rem;color:#f3dcc0;text-align:right}
+@media print{
+  body{background:#fff}
+  .no-print{display:none !important}
+  .print-only{display:block}
+  .wrap{max-width:none;padding:0}
+  header.hero,.stat,.card{box-shadow:none}
+  header.hero{background:#fff}
+  .hero img{width:200px;transform:none;box-shadow:none;border:1px solid #ddd}
+  .stat.main{background:#fff;color:#000;border:2px solid #8a5a2b;position:static}
+  .stat.main .lbl{color:#555}
+  .stat:not(.main){display:block !important}
+  .total-card{position:static}
+  .table-wrap{display:block !important;overflow:visible}
+  .cards{display:none !important}
+  td.act,th.act{display:none}
+  tr{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">🚐 Evidence nákladů</div>
+      <h1>Stavba obytňáku<br>Peugeot Boxer</h1>
+      <p class="subtitle"><b>Matěj Mechl, Terezka a Anička</b></p>
+      <p class="print-only" id="printDate"></p>
+    </div>
+    <img src="van.jpg" width="600" height="356" alt="Peugeot Boxer – přestavba na obytný vůz">
+  </header>
+
+  <section class="total-card">
+    <div class="stat main"><div><div class="lbl">Celkem utraceno</div><div class="val" id="total">0,00 Kč</div></div><div class="sub" id="countSub"></div></div>
+    <div class="stat"><div class="lbl">Počet položek</div><div class="val" id="count">0</div></div>
+    <div class="stat"><div class="lbl">Nejdražší položka</div><div class="val" id="max">–</div></div>
+  </section>
+
+  <section class="card no-print">
+    <h2>➕ Nová položka</h2>
+    <form class="entry" id="entryForm" autocomplete="off">
+      <div class="f-date"><label for="fDate">Datum</label><input type="date" id="fDate" required></div>
+      <div class="f-item"><label for="fItem">Položka</label><input type="text" id="fItem" placeholder="např. Izolace Armaflex" enterkeyhint="next" required></div>
+      <div class="f-price"><label for="fPrice">Cena v Kč</label><input type="text" id="fPrice" placeholder="0,00" inputmode="decimal" enterkeyhint="done" required></div>
+      <div class="f-note"><label for="fNote">Poznámka</label><input type="text" id="fNote" placeholder="obchod, množství…" enterkeyhint="done"></div>
+      <div class="f-btn"><button class="btn btn-primary" type="submit">Přidat</button></div>
+    </form>
+    <div class="hint">Tip: Enter položku přidá. Data se ukládají automaticky v tomto zařízení – pro jistotu občas uložte zálohu (JSON).</div>
+  </section>
+
+  <section class="card">
+    <div class="toolbar">
+      <h2 style="margin:0">📋 Přehled výdajů</h2>
+      <div class="search no-print"><span>🔍</span><input type="search" id="search" placeholder="Hledat v položkách a poznámkách…"></div>
+    </div>
+    <div class="actions no-print" style="margin-bottom:12px">
+      <button class="btn btn-ghost btn-sm" id="btnCsv">⬇️ Export CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btnJson">💾 Záloha JSON</button>
+      <button class="btn btn-ghost btn-sm" id="btnImport">📂 Obnovit zálohu</button>
+      <button class="btn btn-ghost btn-sm" id="btnPrint">🖨️ Tisk</button>
+      <button class="btn btn-install btn-sm" id="btnInstall" hidden>📲 Nainstalovat aplikaci</button>
+      <input type="file" id="importFile" accept=".json,application/json,text/plain" hidden>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Datum</th><th>Položka</th><th class="num">Cena</th><th>Poznámka</th><th class="act no-print"></th></tr></thead>
+        <tbody id="tbody"></tbody>
+        <tfoot id="tfoot"></tfoot>
+      </table>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+  <footer>Stavba obytňáku Peugeot Boxer · data uložena lokálně v zařízení · funguje i offline</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+  var KEY = 'obytnak-boxer-naklady-v1';
+  var entries = [];
+  var editingId = null;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var fmtMoney = new Intl.NumberFormat('cs-CZ', {minimumFractionDigits:2, maximumFractionDigits:2});
+  function money(n){ return fmtMoney.format(n || 0) + '\u00a0Kč'; }
+  function fmtDate(iso){
+    if(!iso) return '';
+    var p = iso.split('-');
+    return p.length === 3 ? (parseInt(p[2],10) + '.\u00a0' + parseInt(p[1],10) + '.\u00a0' + p[0]) : iso;
+  }
+  function today(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function parsePrice(v){
+    if(typeof v === 'number') return Math.round(v*100)/100;
+    var s = String(v || '').replace(/[\s\u00a0]|Kč/g, '').replace(',', '.');
+    if(!/^\d*\.?\d+$|^\d+\.$/.test(s)) return NaN;
+    var n = parseFloat(s);
+    return isFinite(n) ? Math.round(n*100)/100 : NaN;
+  }
+  function plural(n){ return n === 1 ? 'položka' : (n >= 2 && n <= 4 ? 'položky' : 'položek'); }
+  function toast(msg){
+    var t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  function load(){
+    try { var raw = localStorage.getItem(KEY); entries = raw ? JSON.parse(raw) : []; if(!Array.isArray(entries)) entries = []; }
+    catch(e){ entries = []; }
+  }
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify(entries)); }
+    catch(e){ alert('Nepodařilo se uložit data. Uložte si prosím zálohu (JSON).'); }
+  }
+  function sorted(){
+    return entries.slice().sort(function(a,b){
+      if(a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return (a.created||0) - (b.created||0);
+    });
+  }
+  function filtered(){
+    var q = $('search').value.trim().toLowerCase();
+    var list = sorted();
+    if(!q) return list;
+    return list.filter(function(e){
+      return (e.item + ' ' + (e.note||'') + ' ' + fmtDate(e.date).replace(/\u00a0/g,' ') + ' ' + e.date).toLowerCase().indexOf(q) !== -1;
+    });
+  }
+  function editInputs(e){
+    return {
+      date:'<input type="date" class="eDate" value="' + esc(e.date) + '">',
+      item:'<input type="text" class="eItem" value="' + esc(e.item) + '" enterkeyhint="done">',
+      price:'<input type="text" inputmode="decimal" class="ePrice" value="' + esc(String(e.price).replace('.', ',')) + '" enterkeyhint="done">',
+      note:'<input type="text" class="eNote" value="' + esc(e.note) + '" enterkeyhint="done">'
+    };
+  }
+
+  function render(){
+    var list = filtered();
+    var total = entries.reduce(function(s,e){ return s + (e.price||0); }, 0);
+    $('total').textContent = money(total);
+    $('count').textContent = entries.length;
+    $('countSub').textContent = entries.length + ' ' + plural(entries.length);
+    if(entries.length){
+      var mx = entries.reduce(function(a,b){ return b.price > a.price ? b : a; });
+      $('max').textContent = money(mx.price); $('max').title = mx.item;
+    } else { $('max').textContent = '–'; $('max').title=''; }
+
+    if(!list.length){
+      var emp = '<div class="big">' + (entries.length ? '🔍' : '🪵') + '</div>' +
+        (entries.length ? 'Hledání nic nenašlo.' : 'Zatím žádné výdaje. Přidejte první položku výše.');
+      $('tbody').innerHTML = '<tr><td colspan="5" class="empty">' + emp + '</td></tr>';
+      $('tfoot').innerHTML = '';
+      $('cards').innerHTML = '<div class="empty">' + emp + '</div>';
+      return;
+    }
+    var rows = '', cards = '';
+    list.forEach(function(e){
+      if(e.id === editingId){
+        var i = editInputs(e);
+        rows += '<tr class="editing" data-id="' + e.id + '"><td>' + i.date + '</td><td>' + i.item + '</td>' +
+          '<td class="num">' + i.price.replace('class="ePrice"', 'class="ePrice" style="text-align:right;min-width:110px"') + '</td><td>' + i.note + '</td>' +
+          '<td class="act no-print"><button class="btn btn-primary btn-sm" data-act="save">Uložit</button><button class="btn btn-ghost btn-sm" data-act="cancel">Zrušit</button></td></tr>';
+        cards += '<div class="ecard editing" data-id="' + e.id + '">' +
+          '<div class="ef"><label>Položka</label>' + i.item + '</div>' +
+          '<div class="ef" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div><label>Datum</label>' + i.date + '</div><div><label>Cena v Kč</label>' + i.price + '</div></div>' +
+          '<div class="ef"><label>Poznámka</label>' + i.note + '</div>' +
+          '<div class="ebtns"><button class="btn btn-ghost" data-act="cancel">Zrušit</button><button class="btn btn-primary" data-act="save">Uložit</button></div></div>';
+      } else {
+        rows += '<tr data-id="' + e.id + '"><td class="date">' + esc(fmtDate(e.date)) + '</td><td>' + esc(e.item) + '</td>' +
+          '<td class="num price">' + money(e.price) + '</td><td class="note">' + esc(e.note) + '</td>' +
+          '<td class="act no-print"><button class="btn btn-ghost btn-sm" data-act="edit" title="Upravit" aria-label="Upravit">✏️</button><button class="btn btn-danger btn-sm" data-act="del" title="Smazat" aria-label="Smazat">🗑️</button></td></tr>';
+        cards += '<div class="ecard" data-id="' + e.id + '"><div class="ec-main">' +
+          '<div class="ec-top"><span class="ec-item">' + esc(e.item) + '</span><span class="ec-price">' + money(e.price) + '</span></div>' +
+          '<div class="ec-meta">📅 ' + esc(fmtDate(e.date)) + (e.note ? ' · ' + esc(e.note) : '') + '</div></div>' +
+          '<div class="ec-act"><button class="btn btn-ghost" data-act="edit" aria-label="Upravit">✏️</button><button class="btn btn-danger" data-act="del" aria-label="Smazat">🗑️</button></div></div>';
+      }
+    });
+    var shown = list.reduce(function(s,e){ return s + e.price; }, 0);
+    var label = list.length !== entries.length ? 'Součet zobrazených (' + list.length + ')' : 'Celkem';
+    $('tbody').innerHTML = rows;
+    $('tfoot').innerHTML = '<tr><td colspan="2">' + label + '</td><td class="num">' + money(shown) + '</td><td colspan="2"></td></tr>';
+    $('cards').innerHTML = cards + '<div class="cards-total"><span>' + label + '</span><span>' + money(shown) + '</span></div>';
+  }
+  function visibleEditItem(){
+    var c = document.querySelectorAll('.editing .eItem');
+    for(var k=0;k<c.length;k++){ if(c[k].offsetParent) return c[k]; }
+    return null;
+  }
+
+  $('entryForm').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var date = $('fDate').value || today();
+    var item = $('fItem').value.trim();
+    var price = parsePrice($('fPrice').value);
+    var note = $('fNote').value.trim();
+    if(!item){ $('fItem').focus(); toast('Vyplňte název položky'); return; }
+    if(isNaN(price)){ $('fPrice').focus(); toast('Zadejte platnou cenu'); return; }
+    entries.push({id:uid(), date:date, item:item, price:price, note:note, created:Date.now()});
+    save(); render();
+    $('fItem').value=''; $('fPrice').value=''; $('fNote').value='';
+    if(window.matchMedia('(max-width:700px)').matches){ document.activeElement && document.activeElement.blur(); }
+    else $('fItem').focus();
+    toast('Přidáno: ' + item + ' – ' + money(price));
+  });
+  // Enter v poli Položka na mobilu skočí na cenu
+  $('fItem').addEventListener('keydown', function(ev){
+    if(ev.key === 'Enter' && !$('fPrice').value){ ev.preventDefault(); $('fPrice').focus(); }
+  });
+
+  function commitEdit(row){
+    var e = entries.find(function(x){ return x.id === row.dataset.id; }); if(!e) return;
+    var item = row.querySelector('.eItem').value.trim();
+    var price = parsePrice(row.querySelector('.ePrice').value);
+    if(!item){ toast('Název položky nesmí být prázdný'); return; }
+    if(isNaN(price)){ toast('Zadejte platnou cenu'); return; }
+    e.date = row.querySelector('.eDate').value || e.date;
+    e.item = item; e.price = price; e.note = row.querySelector('.eNote').value.trim();
+    editingId = null; save(); render(); toast('Změny uloženy');
+  }
+  function onClick(ev){
+    var b = ev.target.closest('button[data-act]'); if(!b) return;
+    var row = b.closest('[data-id]'); var id = row.dataset.id; var act = b.dataset.act;
+    if(act === 'edit'){ editingId = id; render(); var i = visibleEditItem(); if(i){ i.focus(); i.scrollIntoView({block:'center', behavior:'smooth'}); } }
+    else if(act === 'cancel'){ editingId = null; render(); }
+    else if(act === 'save'){ commitEdit(row); }
+    else if(act === 'del'){
+      var e = entries.find(function(x){ return x.id === id; });
+      if(e && confirm('Opravdu smazat položku „' + e.item + '“ (' + money(e.price) + ')?')){
+        entries = entries.filter(function(x){ return x.id !== id; });
+        if(editingId === id) editingId = null;
+        save(); render(); toast('Položka smazána');
+      }
+    }
+  }
+  function onKey(ev){
+    var row = ev.target.closest('.editing'); if(!row) return;
+    if(ev.key === 'Enter'){ ev.preventDefault(); commitEdit(row); }
+    else if(ev.key === 'Escape'){ editingId = null; render(); }
+  }
+  ['tbody','cards'].forEach(function(id){ $(id).addEventListener('click', onClick); $(id).addEventListener('keydown', onKey); });
+  $('search').addEventListener('input', render);
+
+  // Sdílení / stažení souborů (Web Share API na mobilu, jinak stažení)
+  function download(name, blob){
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  }
+  function shareOrDownload(name, content, mime, title){
+    var blob = new Blob([content], {type:mime});
+    var isTouch = window.matchMedia('(pointer:coarse)').matches;
+    if(isTouch && typeof File === 'function' && navigator.canShare){
+      try {
+        var file = new File([blob], name, {type:mime});
+        if(navigator.canShare({files:[file]})){
+          return navigator.share({files:[file], title:title}).then(function(){ toast('Soubor sdílen'); }).catch(function(err){
+            if(err && err.name === 'AbortError') return;
+            download(name, blob); toast('Soubor stažen');
+          });
+        }
+      } catch(e){}
+    }
+    download(name, blob); toast('Soubor stažen');
+  }
+  function csvCell(s){ s = String(s == null ? '' : s); return /[;"\n\r]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }
+  $('btnCsv').addEventListener('click', function(){
+    if(!entries.length){ toast('Není co exportovat'); return; }
+    var rows = [['Datum','Položka','Cena (Kč)','Poznámka']];
+    sorted().forEach(function(e){
+      var dp = e.date.split('-');
+      rows.push([dp.length===3 ? dp[2]+'.'+dp[1]+'.'+dp[0] : e.date, e.item, e.price.toFixed(2).replace('.', ','), e.note||'']);
+    });
+    var total = entries.reduce(function(s,e){ return s + e.price; }, 0);
+    rows.push(['', 'CELKEM', total.toFixed(2).replace('.', ','), '']);
+    var csv = '\ufeff' + rows.map(function(r){ return r.map(csvCell).join(';'); }).join('\r\n');
+    shareOrDownload('naklady_obytnak_' + today() + '.csv', csv, 'text/csv', 'Náklady obytňák – CSV');
+  });
+  $('btnJson').addEventListener('click', function(){
+    var data = {app:'obytnak-boxer-naklady', version:1, exported:new Date().toISOString(), entries:sorted()};
+    shareOrDownload('zaloha_obytnak_' + today() + '.json', JSON.stringify(data, null, 2), 'application/json', 'Záloha – náklady obytňák');
+  });
+  $('btnImport').addEventListener('click', function(){ $('importFile').value=''; $('importFile').click(); });
+  $('importFile').addEventListener('change', function(){
+    var f = this.files && this.files[0]; if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try {
+        var d = JSON.parse(String(r.result).replace(/^\ufeff/, ''));
+        var list = Array.isArray(d) ? d : d.entries;
+        if(!Array.isArray(list)) throw new Error('format');
+        var clean = list.map(function(e){
+          return {id:e.id || uid(), date:String(e.date||today()), item:String(e.item||''), price:parsePrice(e.price), note:String(e.note||''), created:e.created||Date.now()};
+        }).filter(function(e){ return e.item && !isNaN(e.price); });
+        var replace = !entries.length || confirm('Záloha obsahuje ' + clean.length + ' položek.\n\nOK = nahradit současná data zálohou\nZrušit = přidat k současným datům');
+        if(replace){ entries = clean; }
+        else {
+          var ids = {}; entries.forEach(function(e){ ids[e.id]=1; });
+          clean.forEach(function(e){ if(ids[e.id]) e.id = uid(); entries.push(e); });
+        }
+        editingId = null; save(); render(); toast('Načteno ' + clean.length + ' položek');
+      } catch(err){ alert('Soubor se nepodařilo načíst – není to platná záloha JSON.'); }
+    };
+    r.readAsText(f, 'utf-8');
+  });
+  $('btnPrint').addEventListener('click', function(){
+    $('printDate').textContent = 'Vytištěno ' + fmtDate(today());
+    window.print();
+  });
+
+  // Instalace PWA
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt = e; $('btnInstall').hidden = false; });
+  $('btnInstall').addEventListener('click', function(){
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(){ deferredPrompt = null; $('btnInstall').hidden = true; });
+  });
+  window.addEventListener('appinstalled', function(){ $('btnInstall').hidden = true; toast('Aplikace nainstalována 🎉'); });
+
+  // Trvalé úložiště (aby prohlížeč data nemazal)
+  if(navigator.storage && navigator.storage.persist){ navigator.storage.persist().catch(function(){}); }
+
+  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(err){ console.warn('SW:', err); }); });
+  }
+
+  $('fDate').value = today();
+  load(); render();
+  window.addEventListener('storage', function(ev){ if(ev.key === KEY){ load(); render(); } });
+})();
+</script>
+</body>
+</html>
